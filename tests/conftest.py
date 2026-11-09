@@ -1,4 +1,10 @@
 import pytest
+import os
+if os.environ.get('SONGS_TEST_MOCK') == '1':
+    import pymongo
+    import mongomock
+    pymongo.MongoClient = mongomock.MongoClient
+    os.environ.setdefault('MONGODB_SERVICE', 'localhost')
 from backend import app
 
 
